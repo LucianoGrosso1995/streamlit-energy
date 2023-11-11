@@ -32,6 +32,5 @@ df_new_wells = df.sort_values(by='Date',
 df_prod_resource_basin = df.groupby(['sub_tipo_recurso','Date','cuenca','empresa'])[['Th bbl/d','Mm3/d','Th boe/d']].sum().reset_index()
 
 # Exporto a parquet
-df.to_parquet(f'{_PARQUET_PATH}/database.parquet')
 df_new_wells.to_parquet(f'{_PARQUET_PATH}/database_new_wells.parquet')
 df_prod_resource_basin.to_parquet(f'{_PARQUET_PATH}/database_prod_resource_basin.parquet')
