@@ -1,54 +1,12 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
-import hmac
+from functions import log_in
 
 _PARQUET_PROD = './data/database_prod_resource_basin.parquet'
 _PARQUET_DATABASE = './data/database.parquet'
 _PARQUET_NEW_WELLS = './data/database_new_wells.parquet'
 alt.data_transformers.enable('default', max_rows=None)
-
-
-def check_password():
-    """Returns `True` if the user had a correct password."""
-
-    def login_form():
-        """Form with widgets to collect user information"""
-        with st.form("Credentials"):
-            st.text_input("Username", key="username")
-            st.text_input("Password", type="password", key="password")
-            st.form_submit_button("Log in", on_click=password_entered)
-
-    def password_entered():
-        """Checks whether a password entered by the user is correct."""
-        if st.session_state["username"] in st.secrets[
-            "passwords"
-        ] and hmac.compare_digest(
-            st.session_state["password"],
-            st.secrets.passwords[st.session_state["username"]],
-        ):
-            st.session_state["password_correct"] = True
-            del st.session_state["password"]  # Don't store the username or password.
-            del st.session_state["username"]
-        else:
-            st.session_state["password_correct"] = False
-
-    # Return True if the username + password is validated.
-    if st.session_state.get("password_correct", False):
-        return True
-
-    # Show inputs for username + password.
-    login_form()
-    if "password_correct" in st.session_state:
-        st.error("😕 User not known or password incorrect")
-    return False
-
-
-if not check_password():
-    st.stop()
-
-
-
 
 st.set_page_config(layout="wide",
                    page_title='O&G Dashboard',
@@ -86,7 +44,6 @@ def sidebar(cuencas):
                          options=cuencas)
 
     return selected_resource, selected_basin
-
 
 def charts(df,df_new_wells):
     
@@ -216,9 +173,6 @@ def charts(df,df_new_wells):
 
         st.altair_chart(fig,use_container_width=True)
 
-
-
-
 def kpis(db,db_new_wells):
 
     col1, col2, col3 = st.columns(3)
@@ -244,16 +198,18 @@ def kpis(db,db_new_wells):
         st.metric(label=f'{last_date.strftime("%b %Y")} New Wells in Production', value=last_wells,delta=delta_wells)
 
 def main():
-    st.title("Oil & Gas Dashboard")
-    db, db_new_wells, cuencas = load_data()
-
-    selected_resource, selected_cuenca = sidebar(cuencas)
-    query = """
-            sub_tipo_recurso in @selected_resource \
-            and cuenca in @selected_cuenca
-    """
-    kpis(db.query(query), db_new_wells.query(query))
-    charts(db.query(query), db_new_wells.query(query))
-    
+    st.title("Oil & Gas Dashboard") 
+    if not log_in.log_in():
+        st.stop()
+    else:
+        db, db_new_wells, cuencas = load_data()
+        selected_resource, selected_cuenca = sidebar(cuencas)
+        query = """
+                sub_tipo_recurso in @selected_resource \
+                and cuenca in @selected_cuenca
+        """
+        kpis(db.query(query), db_new_wells.query(query))
+        charts(db.query(query), db_new_wells.query(query))
+        
 if __name__ == '__main__':
     main()    
