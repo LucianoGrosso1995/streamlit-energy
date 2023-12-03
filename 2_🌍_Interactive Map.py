@@ -1,6 +1,10 @@
 import streamlit as st
 from functions import log_in
 
+st.set_page_config(layout="wide",
+                   page_title='O&G Dashboard',
+                   page_icon="🛢")
+
 st.markdown("""
         <style>
                .block-container{
