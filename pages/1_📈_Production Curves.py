@@ -71,7 +71,7 @@ def charts(df):
 
     fig = alt.Chart(
                 acum,
-                title = "Well Cumulative Producction by First Production Year"    
+                title = "Well Cumulative Production by First Production Year"    
             ).mark_line().encode(
             x=alt.X('mes_produccion:Q').title('Production Month'),
             y=alt.Y('sum(boe/d/pozo)').title('boe / d'),
