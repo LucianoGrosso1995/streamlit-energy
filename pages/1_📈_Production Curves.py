@@ -69,7 +69,10 @@ def charts(df):
     acum = curve.groupby(by=['anio_inicio','mes_produccion']) \
                 .sum().groupby(level=0).cumsum().reset_index()
 
-    fig = alt.Chart(acum).mark_line().encode(
+    fig = alt.Chart(
+                acum,
+                title = "Well Cumulative Producction by First Production Year"    
+            ).mark_line().encode(
             x=alt.X('mes_produccion:Q').title('Production Month'),
             y=alt.Y('sum(boe/d/pozo)').title('boe / d'),
             color=alt.Color('anio_inicio:N').title('First Production Year'),
