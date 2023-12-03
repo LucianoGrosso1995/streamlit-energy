@@ -1,1 +1,5 @@
+#Ignora datasets de producción
 *.csv
+
+#Ignora archivos de secretos, es necesario cargarlo en streamlit
+*.toml
