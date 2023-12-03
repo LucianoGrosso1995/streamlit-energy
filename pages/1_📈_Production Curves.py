@@ -2,7 +2,6 @@ import streamlit as st
 from functions import log_in
 import altair as alt
 import pandas as pd
-import matplotlib.pyplot as plt
 
 _PARQUET_CURVE= './data/database_curve.parquet'
 alt.data_transformers.enable('default', max_rows=None)
