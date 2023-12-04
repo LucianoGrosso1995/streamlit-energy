@@ -25,16 +25,16 @@ st.markdown("""
 def map():
     m = folium.Map(location=[-36, -65], zoom_start=5)
 
-    concesiones = gpd.read_file('data\geo\concesiones\producciπn-hidrocarburos-concesiones-de-explotaciπn-shp.shp')
+    concesiones = gpd.read_file('./data/geo/concesiones/producciπn-hidrocarburos-concesiones-de-explotaciπn-shp.shp')
     concesiones = concesiones[['NOMBRE_DE_', 'CODIGO_DE_', 'EMPRESA_OP', 'PARTICIPAC','geometry']]
     c_tooltip = folium.GeoJsonTooltip(fields=['NOMBRE_DE_', 'CODIGO_DE_', 'EMPRESA_OP', 'PARTICIPAC'])
 
-    gasoductos = gpd.read_file('data\geo\gasoductos\gasoductos-de-transporte-enargas--shp.shp')
+    gasoductos = gpd.read_file('./data/geo/gasoductos/gasoductos-de-transporte-enargas--shp.shp')
     gasoductos =  gasoductos[['NOMBRE', 'NOMBRE_DE_', 'EMPRESA_LI', 'TIPO_DE_TR', 'SUBTIPO_DE', 'geometry']]
     g_tooltip = folium.GeoJsonTooltip(fields=['NOMBRE', 'NOMBRE_DE_', 'EMPRESA_LI', 'TIPO_DE_TR', 'SUBTIPO_DE'])
     g_style = {'fillColor': '#046E46', 'color': '#046E46'}
 
-    ductos_hc = gpd.read_file('data\geo\ductos-hidrocarburos\ductos-de-transporte-de-hidrocarburos-planillas-2021-de-la-res-31993-shp.shp')
+    ductos_hc = gpd.read_file('./data/geo/ductos-hidrocarburos/ductos-de-transporte-de-hidrocarburos-planillas-2021-de-la-res-31993-shp.shp')
     ductos_hc = ductos_hc [['DUCTO', 'TRAMO', 'EMPRESA', 'TIPO_DUCTO', 'JURIDICCIO', 'ESTADO', 'geometry']]
     hc_tooltip = folium.GeoJsonTooltip(fields=['DUCTO', 'TRAMO', 'EMPRESA', 'TIPO_DUCTO', 'JURIDICCIO', 'ESTADO'])
     hc_style = {'fillColor': '#9e0740', 'color': '#9e0740'}
