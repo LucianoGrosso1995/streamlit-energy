@@ -2,3 +2,6 @@ streamlit
 pandas
 altair
 numpy
+geopandas
+folium
+streamlit-folium
