@@ -21,7 +21,6 @@ st.markdown("""
         </style>
         """, unsafe_allow_html=True)
 
-@st.cache_data
 def map():
     m = folium.Map(location=[-36, -65], zoom_start=5)
 
