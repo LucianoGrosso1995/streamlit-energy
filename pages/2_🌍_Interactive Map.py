@@ -31,11 +31,11 @@ st.markdown(make_map_responsive, unsafe_allow_html=True)
 
 @st.cache_resource
 def load_data():
-    concesiones = gpd.read_file('./data/geo/concesiones/producciπn-hidrocarburos-concesiones-de-explotaciπn-shp.shp')
+    concesiones = gpd.read_file('./data/geo/concesiones/concesiones.shp')
     concesiones = concesiones[['NOMBRE_DE_', 'CODIGO_DE_', 'EMPRESA_OP', 'PARTICIPAC','geometry']]
-    gasoductos = gpd.read_file('./data/geo/gasoductos/gasoductos-de-transporte-enargas--shp.shp')
+    gasoductos = gpd.read_file('./data/geo/gasoductos/gasoductos.shp')
     gasoductos =  gasoductos[['NOMBRE', 'NOMBRE_DE_', 'EMPRESA_LI', 'TIPO_DE_TR', 'SUBTIPO_DE', 'geometry']]
-    ductos_hc = gpd.read_file('./data/geo/ductos-hidrocarburos/ductos-de-transporte-de-hidrocarburos-planillas-2021-de-la-res-31993-shp.shp')
+    ductos_hc = gpd.read_file('./data/geo/ductos-hidrocarburos/ductos-hidrocarburos.shp')
     ductos_hc = ductos_hc [['DUCTO', 'TRAMO', 'EMPRESA', 'TIPO_DUCTO', 'JURIDICCIO', 'ESTADO', 'geometry']]
     return concesiones, gasoductos, ductos_hc
 
