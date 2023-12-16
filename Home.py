@@ -9,7 +9,7 @@ _PARQUET_NEW_WELLS = './data/database_new_wells.parquet'
 alt.data_transformers.enable('default', max_rows=None)
 
 st.set_page_config(layout="wide",
-                   page_title='Energy Dashboard',
+                   page_title='Energy    Dashboard',
                    page_icon="🛢")
 
 st.markdown("""
