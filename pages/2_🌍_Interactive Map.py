@@ -3,6 +3,7 @@ from functions import log_in
 import geopandas as gpd
 import folium
 from streamlit_folium import st_folium
+from streamlit_folium import folium_static
 
 st.set_page_config(layout="wide",
                    page_title='O&G Dashboard',
@@ -29,7 +30,7 @@ make_map_responsive= """
 st.markdown(make_map_responsive, unsafe_allow_html=True)
 
 
-@st.cache_resource
+@st.cache_data
 def load_data():
     concesiones = gpd.read_file('./data/geo/concesiones/concesiones.shp')
     concesiones = concesiones[['NOMBRE_DE_', 'CODIGO_DE_', 'EMPRESA_OP', 'PARTICIPAC','geometry']]
@@ -56,9 +57,8 @@ def map(concesiones, gasoductos, ductos_hc):
         folium.GeoJson(ductos_hc,name="ductos de hidrocaburos",tooltip=hc_tooltip,style_function=lambda x:hc_style).add_to(m)
         folium.LayerControl().add_to(m)
 
-        st_folium(m)
-
-
+        folium_static(m)
+        
 
 def main():
     if not log_in.log_in():
