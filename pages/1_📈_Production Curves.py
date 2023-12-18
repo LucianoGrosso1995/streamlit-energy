@@ -7,7 +7,7 @@ _PARQUET_CURVE= './data/database_curve.parquet'
 alt.data_transformers.enable('default', max_rows=None)
 
 st.set_page_config(layout="wide",
-                   page_title='O&G Dashboard',
+                   page_title='Energy Dashboard',
                    page_icon="🛢")
 
 st.markdown("""

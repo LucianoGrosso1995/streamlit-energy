@@ -6,7 +6,7 @@ from streamlit_folium import st_folium
 from streamlit_folium import folium_static
 
 st.set_page_config(layout="wide",
-                   page_title='O&G Dashboard',
+                   page_title='Energy Dashboard',
                    page_icon="🛢")
 
 st.markdown("""
