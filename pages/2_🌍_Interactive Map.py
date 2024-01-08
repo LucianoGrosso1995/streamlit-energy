@@ -52,7 +52,7 @@ def map(concesiones, gasoductos, ductos_hc):
         hc_tooltip = folium.GeoJsonTooltip(fields=['DUCTO', 'TRAMO', 'EMPRESA', 'TIPO_DUCTO', 'JURIDICCIO', 'ESTADO'])
         hc_style = {'fillColor': '#9e0740', 'color': '#9e0740'}
 
-        folium.GeoJson(concesiones,name="concesiones",tooltip=c_tooltip).add_to(m)
+        #folium.GeoJson(concesiones,name="concesiones",tooltip=c_tooltip).add_to(m)
         folium.GeoJson(gasoductos,name="gasoductos",tooltip=g_tooltip,style_function=lambda x:g_style).add_to(m)
         folium.GeoJson(ductos_hc,name="ductos de hidrocaburos",tooltip=hc_tooltip,style_function=lambda x:hc_style).add_to(m)
         folium.LayerControl().add_to(m)
